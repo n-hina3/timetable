@@ -19,3 +19,5 @@ async function onHashChange() {
 
 window.addEventListener("hashchange", onHashChange);
 onHashChange();
+
+DB.set(CLASS_STORE_NAME, { id: "test", name: "情報処理I" });
