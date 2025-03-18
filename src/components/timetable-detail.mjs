@@ -18,7 +18,6 @@ export class TimetableDetailComponent extends HTMLElement {
 
   static observedAttributes = ["day-period"];
   get dayPeriod() {
-    return "月-1";
     return this.getAttribute("dayperiod");
   }
 
