@@ -1,6 +1,5 @@
 import "./src/register.mjs";
 import { routes } from "./src/routes.mjs";
-import { DB, CLASS_STORE_NAME } from "./src/shared/db.mjs";
 
 async function onHashChange() {
   const hash = window.location.hash;
@@ -20,5 +19,3 @@ async function onHashChange() {
 
 window.addEventListener("hashchange", onHashChange);
 onHashChange();
-
-DB.set(CLASS_STORE_NAME, { id: "test", name: "情報処理I" });
