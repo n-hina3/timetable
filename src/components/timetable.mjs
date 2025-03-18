@@ -1,8 +1,24 @@
 import { basicStyle } from "../shared/style.mjs";
+import { DB, CLASS_STORE_NAME, TABLE_STORE_NAME } from "../shared/db.mjs";
 
 export class TimetableComponent extends HTMLElement {
   /** @type {ShadowRoot | undefined} */
   shadowRoot = undefined;
+
+  /** @type {import("../types.mjs").ClassData[]} */
+  classDatas = [];
+  /** @type {import("../types.mjs").TableData[]} */
+  tableDatas = [];
+
+  static observedAttributes = ["render-id"];
+  get renderId() {
+    return this.getAttribute("render-id");
+  }
+
+  classDataDayPeriod = (dayperiod) => {
+    const id = this.tableDatas.find((tabledata) => tabledata.dayperiod === dayperiod)?.classId;
+    return this.classDatas.find((classData) => classData.id === id);
+  };
 
   css = () => /* css */ `
     ${basicStyle}
@@ -40,9 +56,11 @@ export class TimetableComponent extends HTMLElement {
               `
                 : /* html */ `
                               <div class="class-item" dayperiod="${`${day}-${period}`}" >
-                              <span>${day}-${period}</span>
+                              <span>${
+                                this.classDataDayPeriod(`${day}-${period}`)?.name || "空き"
+                              }</span>
                             </div>
-              `
+                          `
             )
             .join("")
         )
@@ -55,8 +73,16 @@ export class TimetableComponent extends HTMLElement {
     this.shadowRoot = this.attachShadow({ mode: "open" });
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    this.classDatas = await DB.getAll(CLASS_STORE_NAME);
+    this.tableDatas = await DB.getAll(TABLE_STORE_NAME);
     this.render();
+  }
+
+  async attributeChangedCallback(name, oldValue, newValue) {
+    if ((name = "render-id")) {
+      this.render();
+    }
   }
 
   render() {
