@@ -63,6 +63,12 @@ export class TimetableDetailComponent extends HTMLElement {
       }
     }
 
+    & .content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
     & select {
       height: 32px;
       width: 100%;
@@ -88,7 +94,7 @@ export class TimetableDetailComponent extends HTMLElement {
         <span>${this.day}曜日 ${this.period}時間目</span>
         <button class="header-button">${this.isEditing ? "💾" : "✏️"}</button>
       </div>
-      <div>${
+      <div class="content">${
         this.isEditing
           ? /* html */ `<select id="class-select">${classDatas.map(
               (classData) => /* html */ `
@@ -100,7 +106,9 @@ export class TimetableDetailComponent extends HTMLElement {
           : !this.tableData
           ? /* html */ `<span>空きコマ</span>`
           : /* html */ `<span>${this.classData.name}</span>`
-      }</div>
+      }
+      <textarea></textarea>
+      </div>
     `;
 
     return /* html */ `

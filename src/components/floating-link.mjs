@@ -29,7 +29,7 @@ export class FloatingLink extends HTMLElement {
         height: 48px;
         border: none;
         border-radius: 100vh;
-        background-color: lightblue;
+        background-color:rgba(64, 255, 195, 0.77);
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
         cursor: pointer;
         font-size: 2em;

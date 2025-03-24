@@ -24,7 +24,7 @@ export class HomePage extends HTMLElement {
   <div class="home">
     <timetable-component render-id="${this.renderId}"></timetable-component>
     <timetable-detail dayperiod="${this.dayperiod ?? ""}"></timetable-detail>
-    <floating-link href="#class-list" emoji="📚"></floating-link>
+    <floating-link href="#class-list" emoji="も"></floating-link>
   </div>
 `;
 
